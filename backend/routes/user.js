@@ -16,10 +16,14 @@ router.post("/signup", (req, res) => {
       });
       user.save()
         .then(result => {
-          res.status(201).json();
+          res.status(201).json({
+            message: 'User Created!!'
+          });
         })
         .catch(err => {
-          res.status(500).json();
+          res.status(500).json({
+            message: 'User not created!'
+          });
         });
     });
 });

@@ -7,19 +7,23 @@ export class AuthService {
 
     constructor(private http: HttpClient) { }
 
-    createUser(email: string, password: string) {
-        const authData: AuthData = { email: email, password: password };
-        this.http.post('http://localhost:3000/api/user/signup', authData)
+    createUser(userEmail: string, userPassword: string) {
+        const authData: AuthData = { email: userEmail, password: userPassword };
+        this.http.post<{ message: string }>('http://localhost:3000/api/user/signup', authData)
             .subscribe(response => {
-                console.log(response);
+                console.log(response.message);
+            }, err => {
+                console.log(err);
             });
     }
 
-    login(email: string, password: string) {
-        const authData: AuthData = { email: email, password: password };
+    login(userEmail: string, userPassword: string) {
+        const authData: AuthData = { email: userEmail, password: userPassword };
         this.http.post('http://locahost:3000/api/user/login', authData)
             .subscribe(response => {
                 console.log(response);
+            }, err => {
+                console.log(err);
             });
     }
 }
